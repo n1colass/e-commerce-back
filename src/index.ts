@@ -15,6 +15,8 @@ app.use(express.json());
 
 app.post("/category", ProductsController.getProductsByCategory);
 
+app.post("/search", ProductsController.getProductsBySearch);
+
 async function startApp() {
   try {
     await mongoose.connect(process.env.DB_URL as string);
