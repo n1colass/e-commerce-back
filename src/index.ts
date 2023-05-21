@@ -13,9 +13,11 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-app.post("/category", ProductsController.getProductsByCategory);
+app.post("/products/category", ProductsController.getProductsByCategory);
 
-app.post("/search", ProductsController.getProductsBySearch);
+app.post("/products/search", ProductsController.getProductsBySearch);
+
+app.get("/products/:id", ProductsController.getProductsById);
 
 async function startApp() {
   try {
@@ -25,4 +27,5 @@ async function startApp() {
     console.log(error);
   }
 }
+
 startApp();

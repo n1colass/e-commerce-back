@@ -1,6 +1,7 @@
 import Product from "./product";
 import { Request, Response } from "express";
 import { toFormatSearch } from "./utils/toFormatSearch";
+import { ObjectId } from "bson";
 
 class ProductController {
   async getProductsByCategory(req: Request, res: Response) {
@@ -20,13 +21,29 @@ class ProductController {
       res.status(500).json(e);
     }
   }
+
   async getProductsBySearch(req: Request, res: Response) {
     try {
       const searchProduct: string = toFormatSearch(req.body.search);
-      const productsBySearch = await Product.find({
-        title: searchProduct,
-      });
-      console.log(productsBySearch);
+      if (!searchProduct.length) {
+        const allProducts = await Product.find({});
+        res.status(200).json(allProducts);
+      } else {
+        const productsBySearch = await Product.find({
+          title: searchProduct,
+        });
+        res.status(200).json(productsBySearch);
+      }
+    } catch (e) {
+      console.log(e);
+      res.status(500).json(e);
+    }
+  }
+
+  async getProductsById(req: Request, res: Response) {
+    try {
+      const id = new ObjectId(req.params.id.trim());
+      const productsBySearch = await Product.findOne({ _id: id });
       res.status(200).json(productsBySearch);
     } catch (e) {
       console.log(e);
