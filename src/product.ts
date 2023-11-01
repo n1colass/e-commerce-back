@@ -1,9 +1,18 @@
-import mongoose from "mongoose";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-const Product = new mongoose.Schema({
-  title: { type: "string", require: true },
-  category: { type: "string", require: true },
-  price: { type: "number", require: true },
-});
+@Entity({
+  name: "products",
+})
+export class Product extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  _id: number;
 
-export default mongoose.model("Product", Product);
+  @Column()
+  title: string;
+
+  @Column()
+  category: string;
+
+  @Column()
+  price: number;
+}
