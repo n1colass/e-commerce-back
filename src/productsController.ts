@@ -1,4 +1,4 @@
-import { Product } from "./Product";
+import { Product } from "./product";
 import { Request, Response } from "express";
 import { In } from "typeorm";
 import { toFormatSearch } from "./utils/toFormatSearch";

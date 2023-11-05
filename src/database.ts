@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { Product } from "./Product";
+import { Product } from "./product";
 
 const connectDB = async () => {
   try {
